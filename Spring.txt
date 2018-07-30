@@ -1,0 +1,214 @@
+Spring Framework
+-----------------
+
+Inversion of Control Container -
+It is responsible for maintaining the lifecycle of the java object
+Modules
+DependencyInjection/AOP/Aspects
+Data/Security
+MVC/REST
+
+Materials
+---------
+youtube spring.io/video
+JIRA jira.spring.io
+spring.io/questions
+
+https://github.com/cfaddict/spring-boot-intro
+
+Spring Boot - Takes optinated view to build the spring application
+Spring Cloud - to build the microservices
+
+Why Spring Boot
+Setup & configuration is hard
+XML
+Microservices
+
+
+groovy -v
+
+Gradle for spring application
+
+gradle -v
+
+spring help run
+
+@RestController // Ask spring mvc to look for web routes
+				   Http request will go through the http response instead of using the view
+		
+@RequestMapping("/")// Maps the next method into the home directory of browser
+
+spring  run app.groovy
+
+Spring Initlizer for creating application 
+https://start.spring.io/
+
+From CLI
+spring init --list
+spring init -d=web my-app
+
+From curl
+
+Spring - More than dependencu Injection,used for building enterprise java application
+Application framework like transactional service, template for that
+Progammimg and configuration model - handling request, database injection, model to solve problem
+Infrastructure support
+
+Problems 
+Huge Framework
+Multiple setup steps
+Multiple configuration steps
+Multiple deploying steps
+
+Spring Boot
+Opinionated - start with something
+Convention
+Stand alone - building war file and deploying in the servlet container for deploying - this is removed from spring boot
+Production ready
+
+Maven - helps us list all dependency in one single file pom.xml which will be downloaded in the classpath
+
+GroupId - Package name which uniquely idenityfies the project
+ArtifactId - Project name
+Version - Starting version
+
+To make a project a Sring Boot Project in pom.xml
+Add
+<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.2.RELEASE</version>
+   </parent>
+   
+parent - It tells the vesion that needs to be downloaded for the dependency jar 
+   
+inside project - parent and child maven project whr child inherit the configuration from the parent, so in this we are making our project the child of the parent spring boot project
+
+In spring boot they have one meta dependency which allows us to doenload all teh dependency realated to it so we just hav eto add that meta dependency which will pull in all the related jars
+
+To specify the java version
+<properties>
+		<java.version>1.8</java.version>
+	</properties>
+	
+@SpringBootApplication - Tells us that this is the starting point of our spring boot application
+
+SpringApplication.run(CourseApiApp.class, args); - Calling the static method to run the spring application from the main method
+and passing the class from where we want to start
+
+This application has no explicit mapping for /error, so you are seeing this as a fallback.
+
+SpringApplication.run
+
+Starts the default configuration
+Starts the spring application context
+Performs the classpath scan - all classes are scanned and see if they have spl code like service, controller
+Starts tomcat server -standalone donot need a servlet container
+
+Controller - For mapping the url action and what should happen when the particular action is called
+
+Method that needs to execute when we call the particular controller from thr url
+
+Spring MVC
+@RestController - To make a class rest controller for get and post in json format
+
+@RequestMapping("/hello") - Tells the spring framwork whenver url hit is /hello this method will be executed this is for all the HTTP methods
+
+@RestController - It by deafault converts the return type in the json format
+
+servlet config is now application config
+
+standalone application
+
+useful for microservice architecture
+
+View Tier
+----------
+
+REST API
+---------
+Resources: like Topic, Course, Lesson
+GET /topics
+GET /topics/id
+POST /topics	 : Create a new topic
+PUT /topics/id   : Update the topic
+DELETE /topics/id
+
+
+Business Service
+-----------------
+Singleton - In which it has other class that depend upon it so that the other class can use it without creating the other instance
+
+@Service 
+
+@Autowired : It looks for the instance of the service is already created by @Service and see if there is any method which req that instance and then do the dependency injection
+
+@RequestMapping("/topics/{id}")
+- It shows curly braces are the variable part
+public Topic getTopic(@PathVariable String id)
+-It shows whatever is the variable it is passed as the parameter to id
+
+@RequestMapping(method=RequestMethod.POST, value="/topics")
+- By default it is get so we dont have to add it in mapping
+
+public void addTopic(@RequestBody Topic topic)
+
+@RequestBody 
+- You tell that the Post request will have the json obj change it into the Topic and pass it to addTopic 
+
+While testing via Postman
+Content-Type application/json for post request
+
+
+Other way of Using Spring Boot
+Spring initialzr
+Spring Boot CLI
+STS IDE
+
+Spring initialzr:
+http://start.spring.io/
+
+CLI from cmd
+-spring
+
+From STS IDE
+New Spring Project
+
+Application.properties
+----------------------
+For configuring the Spring Application
+inside resouce make application.properties
+server.port=8088
+
+To find the key
+https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+
+Spring JPA
+-----------
+
+To connect with database and perform the CRUD operation
+JPA - java persistent api : Used for performing the ORM using sql 
+ORM : Object Relational Mapping
+Let us map entiity classes in the SQL tables so when connect to the database JPA is the way to use the ORM
+
+Spring Data JPA
+----------------
+Apache derby is the embeded database for STS for testing
+
+To use JPA
+In Model Class
+
+@Entity : It will create the table in the database
+@Id : For primary key in db
+
+create an interface
+spring data will create the class
+CrudRepository : common repositury in spring data JPA which has the logic for crud opertations
+
+ CrudRepository<Topic,String> //<Entity, Type of that>
+ 
+spring-boot-maven-plugin - For creating the executable jars
+ 
+ 
+ 
+ 
